@@ -4,20 +4,21 @@
 const requestURL="https://api.artic.edu/api/v1/artworks/search?=dog&limit=31"
 
 
-async function fetchData(requestUrl){
-    const response= await fetch(requestUrl)
-    const data=await response.json()
+async function getDogArtworks(requestUrl){
+    let response= await fetch(requestUrl)
+    let data=await response.json()
     let i=0
     while(i<3){
 
         console.log(data.data[i].title)
         i++
     }
+    return data
 
 }
 
 // Call the function and confirm it worked correctly
-fetchData(requestUrl)
+getDogArtworks(requestUrl)
 
 // Task 2
 // Define another function called searchArtworks that takes in a search query and a size limit
@@ -26,8 +27,12 @@ fetchData(requestUrl)
 // Now when the function it's called it should only return artwork the specified # of artworks based on the inputed search query
 // Make sure to console log the values. 
 
-async function searchArtworks(query,size){
-    let requestUrl=
+async function searchArtworks(title,size){
+    let requestUrl="https://api.artic.edu/api/v1/artworks/search?q="+title+"&limit="+size
+    let response= await fetch(requestUrl)
+    let data= await response.json()
+     console.log(data)
+     return data
    
 
 }
@@ -36,4 +41,4 @@ async function searchArtworks(query,size){
 
 // Call the new function with the user inputs and confirm it worked correctly 
 // Test with anything you'd like like 5 "cats" or 2 "flowers"
-
+searchArtworks("cats",5)
